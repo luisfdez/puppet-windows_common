@@ -1,4 +1,4 @@
-class windows_common::configuration::service (
+define windows_common::configuration::service (
   $ensure       = present,
   $binpath,
   $display      = $name,
