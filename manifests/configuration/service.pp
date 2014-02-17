@@ -11,7 +11,7 @@ define windows_common::configuration::service (
   case $ensure {
     present: {
       exec { "create-windows-service-${name}":
-        command => "& sc.exe create ${name} binpath= \"${binpath}\" start= auto DisplayName= \"${display_name}\" ",
+        command => "& sc.exe create ${name} binpath= \" ${binpath} \" start= auto DisplayName= \"${display}\" ",
         unless  => "exit @(Get-Service ${name}).Count -eq 0",
       }
 
