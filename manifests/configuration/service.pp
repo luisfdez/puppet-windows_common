@@ -1,6 +1,6 @@
 define windows_common::configuration::service (
   $ensure       = present,
-  $binpath,
+  $binpath      = undef,
   $display      = $name,
   $description  = "",
   $user         = "LocalSystem",
@@ -10,6 +10,8 @@ define windows_common::configuration::service (
 
   case $ensure {
     present: {
+      validate_string($binpath)
+
       exec { "create-windows-service-${name}":
         command => "& sc.exe create ${name} binpath= \" ${binpath} \" start= auto DisplayName= \"${display}\" ",
         unless  => "exit @(Get-Service ${name}).Count -eq 0",
